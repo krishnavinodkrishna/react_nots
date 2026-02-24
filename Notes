@@ -195,7 +195,200 @@ function Parent() {
 * Makes code clean and easy to manage
 
 
+# Passing Data through Props
 
+1. What are Props?
+        Props are used to pass data from a parent component to a child component in React.
 
+2. Why use Props?
 
+* To make components reusable
+
+* To send dynamic data
+
+* To keep components separate and organized
+
+3. Parent Component:
+
+        function App() {
+  return <Hello name="Krishna" age={21} />;
+}
+
+4. Child Component:
+
+          function Hello(props) {
+  return (
+    <>
+      <h1>Name: {props.name}</h1>
+      <h2>Age: {props.age}</h2>
+    </>
+  );
+}
+
+5. Passing Functions as Props
+
+function App() {
+  const greet = () => alert("Hello!");
+
+  return <Button click={greet} />;
+}
+
+function Button(props) {
+  return <button onClick={props.click}>Click</button>;
+}
+
+# Normal Properties & Methods inside React Component
+
+1. Normal Properties
+
+      These are used to store values inside a component.
+
+Example:-
+    class Hello extends React.Component {
+  name = "Krishna";   // normal property
+
+  render() {
+    return <h1>{this.name}</h1>;
+  }
+}
+
+** Key Points:
+
+* Defined inside the class
+
+* Access using this.propertyName
+
+* Used to store static values
+
+2. Methods (Functions)
+         Methods are functions defined inside the component to perform actions.
+
+Example:-
+   class Hello extends React.Component {
+  greet() {
+    return "Hello World";
+  }
+
+  render() {
+    return <h1>{this.greet()}</h1>;
+  }
+}
+
+# State Management
+
+1. What is State?
+
+* State is an object that holds data
+
+* When state changes → UI automatically updates (re-render)
+
+2. Example (Class Component):-
+
+      class Counter extends React.Component {
+  state = {
+    count: 0
+  };
+
+  render() {
+    return <h1>{this.state.count}</h1>;
+  }
+}
+
+3. Updating State
+      this.setState({ count: this.state.count + 1 });
+
+4. Example with Button
+
+       class Counter extends React.Component {
+  state = { count: 0 };
+
+  increment = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    return (
+      <>
+        <h1>{this.state.count}</h1>
+        <button onClick={this.increment}>Increment</button>
+      </>
+    );
+  }
+}
+
+5. State in Functional Component (useState)
+
+          import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </>
+  );
+}
+
+# Updating Counter State
+
+1. Basic Idea
+
+* Store counter value in state
+
+* Update state when button is clicked
+
+* UI updates automatically
+
+2. Class Component Example
+
+         class Counter extends React.Component {
+  state = { count: 0 };
+
+  increment = () => {
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  render() {
+    return (
+      <>
+        <h1>{this.state.count}</h1>
+        <button onClick={this.increment}>Increment</button>
+      </>
+    );
+  }
+}
+
+3. Functional Component Example
+
+     import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </>
+  );
+}
+
+4. Multiple Updates Example
+
+           incrementTwice = () => {
+  this.setState((prev) => ({ count: prev.count + 1 }));
+  this.setState((prev) => ({ count: prev.count + 1 }));
+};
+
+5. Extra (Decrement Example)
+
+         <button onClick={() => setCount(count - 1)}>
+  Decrement
+</button>
 
